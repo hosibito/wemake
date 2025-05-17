@@ -25,7 +25,7 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  // dark 모드가 적용되게
+  // 우선은 dark 모드가 적용되게
   return (
     <html lang="en" className="dark">
       <head>
