@@ -21,16 +21,13 @@ const paramsSchema = z.object({
 
 export function loader({ request }: Route.LoaderArgs) {
     const url = new URL(request.url);
-    console.log("url :", url);
-    console.log("url searchParams :", url.searchParams);
-    console.log("Object.fromEntries(url.searchParams) :", Object.fromEntries(url.searchParams));
     const { success, data: parsedData } = paramsSchema.safeParse(
         Object.fromEntries(url.searchParams)
     );
     if (!success) {
         throw new Error("Invalid params");
     }
-    console.log("parsedData :", parsedData);
+
     // 데이터 검증완료 DB에서 데이터 조회
 }
 

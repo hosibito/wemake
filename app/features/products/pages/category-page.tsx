@@ -1,12 +1,37 @@
-import type { MetaFunction } from "react-router";
+import { Hero } from "~/common/components/hero";
+import { ProductCard } from "../components/product-card";
+import ProductPagination from "~/common/components/product-pagination";
+import type { Route } from "./+types/category-page";
 
-export function loader() { return {}; }
-export function action() { return {}; }
-export const meta: MetaFunction = () => [
-    { title: "Category | wemake" },
-    { name: "description", content: "Product category" },
-];
+export const meta = ({ params }: Route.MetaArgs) => {
+    return [
+        { title: `Developer Tools | ProductHunt Clone` },
+        { name: "description", content: `Browse Developer Tools products` },
+    ];
+};
 
 export default function CategoryPage() {
-    return <h1>Category Page</h1>;
-} 
+    return (
+        <div className="space-y-10">
+            <Hero
+                title={"Developer Tools"}
+                subtitle={`Tools for developers to build products faster`}
+            />
+
+            <div className="space-y-5 w-full max-w-screen-md mx-auto">
+                {Array.from({ length: 11 }).map((_, index) => (
+                    <ProductCard
+                        key={`productId-${index}`}
+                        id={`productId-${index}`}
+                        name="Product Name"
+                        description="Product Description"
+                        commentsCount={12}
+                        viewsCount={12}
+                        votesCount={120}
+                    />
+                ))}
+            </div>
+            <ProductPagination totalPages={10} />
+        </div>
+    );
+}
