@@ -1,11 +1,34 @@
 import { Link } from "react-router";
-import { Separator } from "./ui/separator";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "./ui/navigation-menu";
+import { Separator } from "~/common/components/ui/separator";
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+    navigationMenuTriggerStyle,
+} from "./ui/navigation-menu";
 import { cn } from "~/lib/utils";
 import { Button } from "./ui/button";
-import { BarChart3Icon, BellIcon, LogOutIcon, MessageCircleIcon, SettingsIcon, UserIcon } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import {
+    BarChart3Icon,
+    BellIcon,
+    LogOutIcon,
+    MessageCircleIcon,
+    SettingsIcon,
+    UserIcon,
+} from "lucide-react";
 
 const menus = [
     {
@@ -64,8 +87,8 @@ const menus = [
                 to: "/jobs?type=internship",
             },
             {
-                name: "Submit a Job",
-                description: "Submit a job to our community",
+                name: "Post a Job",
+                description: "Post a job to our community",
                 to: "/jobs/submit",
             },
         ],
@@ -118,14 +141,22 @@ const menus = [
     },
 ];
 
-export function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLoggedIn: boolean, hasNotifications: boolean, hasMessages: boolean }) {
+export default function Navigation({
+    isLoggedIn,
+    hasNotifications,
+    hasMessages,
+}: {
+    isLoggedIn: boolean;
+    hasNotifications: boolean;
+    hasMessages: boolean;
+}) {
     return (
         <nav className="flex px-20 h-16 items-center justify-between backdrop-blur fixed top-0 left-0 right-0 z-50 bg-background/50">
             <div className="flex items-center">
-                <Link to="/" className="font-bold tracking-tighter text-lg">wemake</Link>
-                <div className="h-6 flex items-center mx-4">
-                    <Separator orientation="vertical" className="h-full" />
-                </div>
+                <Link to="/" className="font-bold tracking-tighter text-lg">
+                    wemake
+                </Link>
+                <Separator orientation="vertical" className="h-6 mx-4" />
                 <NavigationMenu>
                     <NavigationMenuList>
                         {menus.map((menu) => (
@@ -147,7 +178,7 @@ export function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLo
                                                             "col-span-2 bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
                                                         ])}
                                                     >
-                                                        <NavigationMenuLink asChild>
+                                                        <NavigationMenuLink>
                                                             <Link
                                                                 className="p-3 space-y-1 block leading-none no-underline outline-none"
                                                                 to={item.to}
@@ -177,7 +208,7 @@ export function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLo
             </div>
             {isLoggedIn ? (
                 <div className="flex items-center gap-4">
-                    <Button size="icon" variant="ghost" className="relative" asChild>
+                    <Button size="icon" variant="ghost" asChild className="relative">
                         <Link to="/my/notifications">
                             <BellIcon className="size-4" />
                             {hasNotifications && (
@@ -185,7 +216,7 @@ export function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLo
                             )}
                         </Link>
                     </Button>
-                    <Button size="icon" variant="ghost" className="relative" asChild>
+                    <Button size="icon" variant="ghost" asChild className="relative">
                         <Link to="/my/messages">
                             <MessageCircleIcon className="size-4" />
                             {hasMessages && (
@@ -205,9 +236,7 @@ export function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLo
                                 <span className="font-medium">John Doe</span>
                                 <span className="text-xs text-muted-foreground">@username</span>
                             </DropdownMenuLabel>
-
                             <DropdownMenuSeparator />
-
                             <DropdownMenuGroup>
                                 <DropdownMenuItem asChild className="cursor-pointer">
                                     <Link to="/my/dashboard">
@@ -228,9 +257,7 @@ export function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLo
                                     </Link>
                                 </DropdownMenuItem>
                             </DropdownMenuGroup>
-
                             <DropdownMenuSeparator />
-
                             <DropdownMenuItem asChild className="cursor-pointer">
                                 <Link to="/auth/logout">
                                     <LogOutIcon className="size-4 mr-2" />
@@ -251,5 +278,5 @@ export function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLo
                 </div>
             )}
         </nav>
-    )
+    );
 }
