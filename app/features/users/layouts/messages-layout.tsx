@@ -6,7 +6,7 @@ import {
     SidebarMenu,
     SidebarProvider,
 } from "~/common/components/ui/sidebar";
-import { MessageCard } from "~/features/users/components/message-card";
+import MessageRoomCard from "~/features/users/components/message-card";
 
 export default function MessagesLayout() {
     return (
@@ -16,7 +16,7 @@ export default function MessagesLayout() {
                     <SidebarGroup>
                         <SidebarMenu>
                             {Array.from({ length: 15 }).map((_, index) => (
-                                <MessageCard
+                                <MessageRoomCard
                                     key={index}
                                     id={index.toString()}
                                     name={`User ${index}`}
